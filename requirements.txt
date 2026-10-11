@@ -1,0 +1,12 @@
+﻿fastapi
+uvicorn[standard]
+python-multipart
+watchdog
+pdfplumber
+python-docx
+datasketch>=2.0
+numpy
+reportlab
+google-auth-oauthlib
+google-api-python-client
+requests

@@ -1,0 +1,17 @@
+# secrets / personal data - never commit
+credentials.json
+credentials.json.json
+token.json
+client_secret*.json
+tracker.db
+tracker.db-*
+watched/
+*.log
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# vercel
+.vercel/
