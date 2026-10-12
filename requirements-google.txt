@@ -1,0 +1,5 @@
+# Optional: Gmail import/send and Drive link (local use only; not needed for the demo or Vercel)
+-r requirements.txt
+google-auth-oauthlib
+google-api-python-client
+requests

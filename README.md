@@ -12,6 +12,8 @@ python -m venv .venv
 .\.venv\Scripts\python -m uvicorn main:app --port 8000    # open http://localhost:8000
 ```
 
+Gmail/Drive features are optional: `.\.venv\Scripts\python -m pip install -r requirements-google.txt`.
+
 macOS/Linux: use `.venv/bin/python` instead. Env vars: `WATCH_DIR` (default `./watched`), `TRACKER_DB` (default `./tracker.db`).
 Optional smoke test (server running): `.\.venv\Scripts\python smoke.py`
 
