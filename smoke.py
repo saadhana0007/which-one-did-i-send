@@ -9,7 +9,8 @@ import requests
 
 import watcher
 
-B = "http://localhost:8000"
+import os
+B = os.environ.get("SMOKE_BASE", "http://localhost:8000")
 fails = 0
 
 
@@ -20,9 +21,9 @@ def check(name, cond):
 
 
 fams = requests.get(B + "/api/families").json()
-check("2 families", len(fams) == 2)
-check("assignment family has 3 versions", sorted(f["version_count"] for f in fams) == [2, 3])
-check("alerts for both families", len(requests.get(B + "/api/alerts").json()) == 2)
+check("7 families", len(fams) == 7)
+check("version counts per family", sorted(f["version_count"] for f in fams) == [1, 2, 2, 2, 2, 3, 3])
+check("4 outdated sends (assignment, resume, proposal, notes)", len(requests.get(B + "/api/alerts").json()) == 4)
 
 ask = lambda q: requests.get(B + "/api/ask", params={"q": q}).json()
 a = ask("what did I send to prof")
@@ -39,7 +40,7 @@ if src.exists():
     time.sleep(3)
     b = ask("what did I send to prof")
     check("rename keeps identity", b["found"] and b["version"]["sha256"] == a["version"]["sha256"])
-    check("rename created no new version", sum(f["version_count"] for f in requests.get(B + "/api/families").json()) == 5)
+    check("rename created no new version", sum(f["version_count"] for f in requests.get(B + "/api/families").json()) == 15)
     shutil.move(tmp, src)
     time.sleep(2)
 sys.exit(1 if fails else 0)
